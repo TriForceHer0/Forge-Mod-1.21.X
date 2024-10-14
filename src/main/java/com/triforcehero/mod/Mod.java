@@ -63,6 +63,9 @@ public class Mod {
                 event.accept(ModBlocks.MAGCHUNK_BLOCK);
 
             }
+            if(event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
+                event.accept(ModBlocks.LEADORE_BLOCK);
+            }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

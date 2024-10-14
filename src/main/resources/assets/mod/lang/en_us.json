@@ -3,5 +3,7 @@
   "item.mod.magnesium": "Magnesium Chunk",
 
   "block.mod.lead_block": "Block of Lead",
-  "block.mod.magnesiumchunk_block": "Block of Magnesium Chunks"
+  "block.mod.magnesiumchunk_block": "Block of Magnesium Chunks",
+  "block.mod.leadore_block": "Lead Ore"
+
 }
