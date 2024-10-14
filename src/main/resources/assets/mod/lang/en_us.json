@@ -1,4 +1,7 @@
 {
   "item.mod.lead": "Lead Ingot",
-  "item.mod.magnesium": "Magnesium Chunk"
+  "item.mod.magnesium": "Magnesium Chunk",
+
+  "block.mod.lead_block": "Block of Lead",
+  "block.mod.magnesiumchunk_block": "Block of Magnesium Chunks"
 }

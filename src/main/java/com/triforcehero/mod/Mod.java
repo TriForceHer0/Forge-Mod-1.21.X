@@ -1,6 +1,7 @@
 package com.triforcehero.mod;
 
 import com.mojang.logging.LogUtils;
+import com.triforcehero.mod.block.ModBlocks;
 import com.triforcehero.mod.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -37,6 +38,7 @@ public class Mod {
         MinecraftForge.EVENT_BUS.register(this);
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -54,7 +56,13 @@ public class Mod {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.LEAD);
             event.accept(ModItems.MAGNESIUM);
+
         }
+            if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+                event.accept(ModBlocks.LEAD_BLOCK);
+                event.accept(ModBlocks.MAGCHUNK_BLOCK);
+
+            }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
