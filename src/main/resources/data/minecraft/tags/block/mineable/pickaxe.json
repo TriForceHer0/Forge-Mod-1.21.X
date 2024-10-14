@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "mod:lead_block",
+    "mod:lead_ore",
+    "mod:lead_deepslate_ore",
+    "mod:magnesiumchunk_block"
+  ]
+}

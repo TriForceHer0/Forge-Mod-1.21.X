@@ -56,6 +56,7 @@ public class Mod {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.LEAD);
             event.accept(ModItems.MAGNESIUM);
+            event.accept(ModItems.RAWLEAD);
 
         }
             if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
@@ -64,7 +65,8 @@ public class Mod {
 
             }
             if(event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
-                event.accept(ModBlocks.LEADORE_BLOCK);
+                event.accept(ModBlocks.LEAD_ORE);
+                event.accept(ModBlocks.LEAD_DEEPSLATE_ORE);
             }
     }
 
