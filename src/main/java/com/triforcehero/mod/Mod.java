@@ -26,8 +26,7 @@ public class Mod {
     public static final Logger LOGGER = LogUtils.getLogger();
 
 
-    public Mod()
-    {
+    public Mod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         // Register the commonSetup method for modloading
@@ -53,21 +52,21 @@ public class Mod {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.LEAD);
             event.accept(ModItems.MAGNESIUM);
             event.accept(ModItems.RAWLEAD);
 
         }
-            if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-                event.accept(ModBlocks.LEAD_BLOCK);
-                event.accept(ModBlocks.MAGCHUNK_BLOCK);
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(ModBlocks.LEAD_BLOCK);
+            event.accept(ModBlocks.MAGCHUNK_BLOCK);
 
-            }
-            if(event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
-                event.accept(ModBlocks.LEAD_ORE);
-                event.accept(ModBlocks.LEAD_DEEPSLATE_ORE);
-            }
+        }
+        if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
+            event.accept(ModBlocks.LEAD_ORE);
+            event.accept(ModBlocks.LEAD_DEEPSLATE_ORE);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -76,10 +75,10 @@ public class Mod {
 
     }
 
+
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @net.minecraftforge.fml.common.Mod.EventBusSubscriber(modid = MOD_ID, bus = net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
+    public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
