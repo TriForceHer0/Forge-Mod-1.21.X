@@ -30,12 +30,14 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(ModBlocks.LEAD_BLOCK.get());
         dropSelf(ModBlocks.MAGCHUNK_BLOCK.get());
-        // dropSelf(ModBlocks.MAGIC_BLOCK.get());
+
 
         this.add(ModBlocks.LEAD_ORE.get(),
                 block -> createOreDrop(ModBlocks.LEAD_ORE.get(), ModItems.RAWLEAD.get()));
         this.add(ModBlocks.LEAD_DEEPSLATE_ORE.get(),
                 block -> createMultipleOreDrops(ModBlocks.LEAD_DEEPSLATE_ORE.get(), ModItems.RAWLEAD.get(), 2, 6));
+        this.add(ModBlocks.MAGNESIUM_ORE.get(),
+                block -> createMultipleOreDrops(ModBlocks.MAGNESIUM_ORE.get(), ModItems.MAGNESIUM.get(), 4, 8));
     }
 
     protected LootTable.Builder createMultipleOreDrops(Block pBlock, Item item, float minDrops, float maxDrops) {

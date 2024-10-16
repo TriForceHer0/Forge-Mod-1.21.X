@@ -1,5 +1,5 @@
 
-package com.triforcehero.mod.worldgen.;
+package com.triforcehero.mod.worldgen;
 
 import net.minecraft.world.level.levelgen.placement.*;
 

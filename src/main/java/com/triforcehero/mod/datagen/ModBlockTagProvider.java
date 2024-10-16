@@ -26,7 +26,10 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.LEAD_DEEPSLATE_ORE.get());
 
         tag(BlockTags.NEEDS_STONE_TOOL)
-                .add(ModBlocks.MAGCHUNK_BLOCK.get());
+                .add(ModBlocks.MAGCHUNK_BLOCK.get())
+                .add(ModBlocks.MAGNESIUM_ORE.get());
+
+
 
 
 

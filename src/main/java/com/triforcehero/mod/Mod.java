@@ -66,6 +66,7 @@ public class Mod {
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
             event.accept(ModBlocks.LEAD_ORE);
             event.accept(ModBlocks.LEAD_DEEPSLATE_ORE);
+            event.accept(ModBlocks.MAGNESIUM_ORE);
         }
     }
 

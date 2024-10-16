@@ -37,6 +37,10 @@ public class ModBlocks {
             () -> new DropExperienceBlock(UniformInt.of(3, 6), BlockBehaviour.Properties.of()
                     .strength(5f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)));
 
+    public static final RegistryObject<Block> MAGNESIUM_ORE = registerBlock("magnesium_ore",
+            () -> new DropExperienceBlock(UniformInt.of(1, 3), BlockBehaviour.Properties.of()
+                    .strength(1f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
