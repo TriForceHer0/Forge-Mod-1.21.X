@@ -15,6 +15,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         basicItem(ModItems.LEAD.get());
         basicItem(ModItems.RAWLEAD.get());
+        basicItem(ModItems.MAGNESIUM.get());
 
 
     }
