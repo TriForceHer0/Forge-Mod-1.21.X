@@ -21,7 +21,7 @@ import java.util.List;
 public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_LEAD_ORE_KEY = registerKey("lead_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_MAGNESIUM_ORE_KEY = registerKey("magnesium_ore");
-   // public static final ResourceKey<ConfiguredFeature<?, ?>> END_SAPPHIRE_ORE_KEY = registerKey("end_sapphire_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_QUARTZITE_ORE_KEY = registerKey("quartzite_block");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplaceable = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
@@ -31,7 +31,8 @@ public class ModConfiguredFeatures {
 
         List<OreConfiguration.TargetBlockState> overworldOres = List.of(
                 OreConfiguration.target(stoneReplaceable, ModBlocks.MAGNESIUM_ORE.get().defaultBlockState()),
-                OreConfiguration.target(stoneReplaceable, ModBlocks.LEAD_ORE.get().defaultBlockState())
+                OreConfiguration.target(stoneReplaceable, ModBlocks.LEAD_ORE.get().defaultBlockState()),
+                OreConfiguration.target(stoneReplaceable, ModBlocks.QUARTZITE_ORE.get().defaultBlockState())
 
 
 
@@ -44,6 +45,7 @@ public class ModConfiguredFeatures {
 
         register(context, OVERWORLD_LEAD_ORE_KEY, Feature.ORE, new OreConfiguration(overworldOres, 5));
         register(context, OVERWORLD_MAGNESIUM_ORE_KEY, Feature.ORE, new OreConfiguration(overworldOres, 12));
+        register(context, OVERWORLD_QUARTZITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldOres, 12));
        // register(context, NETHER_SAPPHIRE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplacables,
                // ModBlocks.NETHER_SAPPHIRE_ORE.get().defaultBlockState(), 9));
        // register(context, END_SAPPHIRE_ORE_KEY, Feature.ORE, new OreConfiguration(endReplaceables,

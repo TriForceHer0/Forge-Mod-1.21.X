@@ -67,6 +67,7 @@ public class Mod {
             event.accept(ModBlocks.LEAD_ORE);
             event.accept(ModBlocks.LEAD_DEEPSLATE_ORE);
             event.accept(ModBlocks.MAGNESIUM_ORE);
+            event.accept(ModBlocks.QUARTZITE_ORE);
         }
     }
 

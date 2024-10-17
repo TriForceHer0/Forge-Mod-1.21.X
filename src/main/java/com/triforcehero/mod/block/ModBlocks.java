@@ -39,7 +39,11 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> MAGNESIUM_ORE = registerBlock("magnesium_ore",
             () -> new DropExperienceBlock(UniformInt.of(1, 3), BlockBehaviour.Properties.of()
-                    .strength(1f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+                    .strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
+    public static final RegistryObject<Block> QUARTZITE_ORE = registerBlock("quartzite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
