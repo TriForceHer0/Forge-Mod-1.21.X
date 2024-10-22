@@ -29,10 +29,29 @@ public class ModConfiguredFeatures {
         RuleTest netherrackReplacables = new BlockMatchTest(Blocks.NETHERRACK);
         RuleTest endReplaceables = new BlockMatchTest(Blocks.END_STONE);
 
-        List<OreConfiguration.TargetBlockState> overworldOres = List.of(
-                OreConfiguration.target(stoneReplaceable, ModBlocks.MAGNESIUM_ORE.get().defaultBlockState()),
-                OreConfiguration.target(stoneReplaceable, ModBlocks.LEAD_ORE.get().defaultBlockState()),
+        List<OreConfiguration.TargetBlockState> overworldLeadOres = List.of(
+                OreConfiguration.target(stoneReplaceable, ModBlocks.LEAD_ORE.get().defaultBlockState())
+
+
+
+
+
+
+
+        );
+        List<OreConfiguration.TargetBlockState> overworldMagnesiumOres = List.of(
+                OreConfiguration.target(stoneReplaceable, ModBlocks.MAGNESIUM_ORE.get().defaultBlockState())
+
+
+
+
+
+
+        );
+        List<OreConfiguration.TargetBlockState> overworldQuartziteOres = List.of(
                 OreConfiguration.target(stoneReplaceable, ModBlocks.QUARTZITE_ORE.get().defaultBlockState())
+
+
 
 
 
@@ -43,13 +62,11 @@ public class ModConfiguredFeatures {
 
 
 
-        register(context, OVERWORLD_LEAD_ORE_KEY, Feature.ORE, new OreConfiguration(overworldOres, 5));
-        register(context, OVERWORLD_MAGNESIUM_ORE_KEY, Feature.ORE, new OreConfiguration(overworldOres, 12));
-        register(context, OVERWORLD_QUARTZITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldOres, 12));
-       // register(context, NETHER_SAPPHIRE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplacables,
-               // ModBlocks.NETHER_SAPPHIRE_ORE.get().defaultBlockState(), 9));
-       // register(context, END_SAPPHIRE_ORE_KEY, Feature.ORE, new OreConfiguration(endReplaceables,
-             //   ModBlocks.END_STONE_SAPPHIRE_ORE.get().defaultBlockState(), 9));
+
+        register(context, OVERWORLD_LEAD_ORE_KEY, Feature.ORE, new OreConfiguration(overworldLeadOres, 5));
+        register(context, OVERWORLD_MAGNESIUM_ORE_KEY, Feature.ORE, new OreConfiguration(overworldMagnesiumOres, 8));
+        register(context, OVERWORLD_QUARTZITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldQuartziteOres, 18));
+
     }
 
 
