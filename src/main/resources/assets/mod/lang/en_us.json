@@ -2,12 +2,14 @@
   "item.mod.lead": "Lead Ingot",
   "item.mod.raw_lead": "Raw Lead",
   "item.mod.magnesium": "Magnesium Chunk",
+  "item.mod.quartzite_chunk": "Quartzite Chunk",
 
   "block.mod.lead_block": "Block of Lead",
   "block.mod.magnesiumchunk_block": "Block of Magnesium Chunks",
   "block.mod.lead_ore": "Lead Ore",
   "block.mod.lead_deepslate_ore": "Deepslate Lead Ore",
   "block.mod.magnesium_ore": "Magnesium Ore",
-  "block.mod.quartzite_block": "Quartzite Block"
-
+  "block.mod.quartzite_block": "Quartzite Block",
+  "block.mod.deepslate_pentlandite_ore": "Deepslate Pentlandite Ore",
+  "block.mod.pedestal": "Pedestal"
 }

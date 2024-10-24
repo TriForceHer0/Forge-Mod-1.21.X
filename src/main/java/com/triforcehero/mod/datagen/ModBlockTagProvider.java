@@ -25,7 +25,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.LEAD_ORE.get())
                 .add(ModBlocks.LEAD_DEEPSLATE_ORE.get())
                 .add(ModBlocks.MAGNESIUM_ORE.get())
-                .add(ModBlocks.QUARTZITE_ORE.get());
+                .add(ModBlocks.QUARTZITE_ORE.get())
+                .add(ModBlocks.DEEPSLATE_PENTLANDITE_ORE.get());
 
 
         tag(BlockTags.NEEDS_STONE_TOOL)
@@ -40,7 +41,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.LEAD_DEEPSLATE_ORE.get())
                 .add(ModBlocks.LEAD_BLOCK.get())
-                .add(ModBlocks.LEAD_ORE.get());
+                .add(ModBlocks.LEAD_ORE.get())
+                .add(ModBlocks.DEEPSLATE_PENTLANDITE_ORE.get());
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL);
     }

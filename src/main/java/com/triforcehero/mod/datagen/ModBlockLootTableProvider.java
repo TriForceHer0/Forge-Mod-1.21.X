@@ -30,6 +30,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(ModBlocks.LEAD_BLOCK.get());
         dropSelf(ModBlocks.MAGCHUNK_BLOCK.get());
+        dropSelf(ModBlocks.PEDESTAL.get());
 
 
         this.add(ModBlocks.LEAD_ORE.get(),
@@ -37,9 +38,12 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.add(ModBlocks.MAGNESIUM_ORE.get(),
                 block -> createMultipleOreDrops(ModBlocks.MAGNESIUM_ORE.get(), ModItems.MAGNESIUM.get(), 4, 8));
         this.add(ModBlocks.QUARTZITE_ORE.get(),
-                block -> createMultipleOreDrops(ModBlocks.QUARTZITE_ORE.get(), ModItems.MAGNESIUM.get(), 4, 8));
+                block -> createMultipleOreDrops(ModBlocks.QUARTZITE_ORE.get(), ModItems.QUARTZITECHUNK.get(), 1, 3));
         this.add(ModBlocks.LEAD_DEEPSLATE_ORE.get(),
                 block -> createMultipleOreDrops(ModBlocks.LEAD_ORE.get(), ModItems.RAWLEAD.get(), 4, 8));
+        this.add(ModBlocks.DEEPSLATE_PENTLANDITE_ORE.get(),
+                block -> createMultipleOreDrops(ModBlocks.DEEPSLATE_PENTLANDITE_ORE.get(), ModItems.QUARTZITECHUNK.get(), 4, 8));
+
 
 
 

@@ -1,11 +1,13 @@
 package com.triforcehero.mod.block;
 
 import com.triforcehero.mod.Mod;
+import com.triforcehero.mod.block.custom.PedestalBlock;
 import com.triforcehero.mod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -45,9 +47,12 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
 
-    public static final RegistryObject<Block> PENTLANDITE_ORE = registerBlock("pentlandite_block",
+    public static final RegistryObject<Block> DEEPSLATE_PENTLANDITE_ORE = registerBlock("deepslate_pentlandite_ore",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(5f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)));
+
+    public static final RegistryObject<Block> PEDESTAL = registerBlock("pedestal",
+            () -> new PedestalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){

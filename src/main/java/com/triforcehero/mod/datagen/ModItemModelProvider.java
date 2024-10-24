@@ -16,6 +16,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.LEAD.get());
         basicItem(ModItems.RAWLEAD.get());
         basicItem(ModItems.MAGNESIUM.get());
+        basicItem(ModItems.QUARTZITECHUNK.get());
 
 
     }

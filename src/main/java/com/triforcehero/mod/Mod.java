@@ -2,9 +2,12 @@ package com.triforcehero.mod;
 
 import com.mojang.logging.LogUtils;
 import com.triforcehero.mod.block.ModBlocks;
+import com.triforcehero.mod.block.entity.ModBlockEntities;
+import com.triforcehero.mod.block.entity.renderer.PedestalBlockEntityRenderer;
 import com.triforcehero.mod.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -32,6 +35,8 @@ public class Mod {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+        ModBlockEntities.register(modEventBus);
+
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -56,6 +61,7 @@ public class Mod {
             event.accept(ModItems.LEAD);
             event.accept(ModItems.MAGNESIUM);
             event.accept(ModItems.RAWLEAD);
+            event.accept(ModItems.QUARTZITECHUNK);
 
         }
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
@@ -84,6 +90,11 @@ public class Mod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
+        }
+
+        @SubscribeEvent
+        public  static  void registerBER(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(ModBlockEntities.PEDESTAL_BE.get(), PedestalBlockEntityRenderer::new);
         }
     }
 }
