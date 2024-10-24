@@ -1,26 +1,54 @@
 package com.triforcehero.mod.block.entity.custom;
 
 import com.triforcehero.mod.block.entity.ModBlockEntities;
+import com.triforcehero.mod.screen.custom.PedestalMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jline.utils.InfoCmp;
 
-public class PedestalBlockEntity extends BlockEntity implements Container {
-    private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+import javax.swing.plaf.basic.BasicComboBoxUI;
+import java.security.DrbgParameters;
+
+public class PedestalBlockEntity extends BlockEntity implements Container, MenuProvider {
+    private final ItemStackHandler inventory  = new ItemStackHandler(1) {
+        @Override
+        protected int getStackLimit(int  slot, @NotNull ItemStack stack) {
+            return 1;
+        }
+
+        protected void onContentChanged(int slot)  {
+            setChanged();
+            if (!level.isClientSide()) {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        }
+    };
     private float rotation = 0;
+    private LazyOptional<ItemStackHandler> lazyItemHandler = LazyOptional.empty();
 
     public PedestalBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.PEDESTAL_BE.get(), pPos, pBlockState);
@@ -28,7 +56,7 @@ public class PedestalBlockEntity extends BlockEntity implements Container {
 
     @Override
     public int getContainerSize() {
-        return inventory.size();
+        return inventory.getSlots();
     }
 
     @Override
@@ -45,27 +73,27 @@ public class PedestalBlockEntity extends BlockEntity implements Container {
     @Override
     public ItemStack getItem(int i) {
         setChanged();
-        return inventory.get(i);
+        return inventory.getStackInSlot(i);
     }
 
     @Override
     public ItemStack removeItem(int i, int amount) {
         setChanged();
-        ItemStack stack = inventory.get(i);
+        ItemStack stack = inventory.getStackInSlot(i);
         stack.shrink(amount);
-        return inventory.set(i, stack);
+        return inventory.insertItem(i, stack, false);
     }
 
     @Override
     public ItemStack removeItemNoUpdate(int i) {
         setChanged();
-        return ContainerHelper.takeItem(inventory, i);
+        return i >= 0 && 1 < getContainerSize() ? inventory.insertItem(i, ItemStack.EMPTY, false) : ItemStack.EMPTY;
     }
 
     @Override
     public void setItem(int i, ItemStack itemStack) {
         setChanged();
-        inventory.set(i, itemStack.copyWithCount(1));
+        inventory.insertItem(i, itemStack.copyWithCount(1), false);
     }
 
     @Override
@@ -75,19 +103,21 @@ public class PedestalBlockEntity extends BlockEntity implements Container {
 
     @Override
     public void clearContent() {
-        inventory.clear();
+        for (int i = 0; 1 < getContainerSize(); i++) {
+            inventory.extractItem(i, 64, false);
+        }
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.saveAdditional(pTag, pRegistries);
-        ContainerHelper.saveAllItems(pTag, inventory, pRegistries);
+        pTag.put("inventory", inventory.serializeNBT(pRegistries));
     }
 
     @Override
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(pTag, pRegistries);
-        ContainerHelper.loadAllItems(pTag, inventory, pRegistries);
+        inventory.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
     }
 
     public float getRenderingRotation() {
@@ -108,5 +138,37 @@ public class PedestalBlockEntity extends BlockEntity implements Container {
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         return saveWithoutMetadata(pRegistries);
 
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        lazyItemHandler = LazyOptional.of(() -> inventory);
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        lazyItemHandler.invalidate();
+    }
+
+    @Override
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if (cap == ForgeCapabilities.ITEM_HANDLER) {
+            if (side == null){
+                return lazyItemHandler.cast();
+            }
+        }
+        return super.getCapability(cap, side);
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return Component.translatable("name.mod.pedestal_be");
+    }
+
+    @Override
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new PedestalMenu(i, inventory, this);
     }
 }

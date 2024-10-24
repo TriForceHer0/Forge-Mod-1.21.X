@@ -4,14 +4,14 @@ package com.triforcehero.mod.block.custom;
 import com.mojang.serialization.MapCodec;
 import com.triforcehero.mod.block.entity.custom.PedestalBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.MenuConstructor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -66,19 +66,24 @@ public class PedestalBlock extends BaseEntityBlock {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
 
-        if(pLevel.getBlockEntity(pPos) instanceof  PedestalBlockEntity pedestalBlockEntity) {
-            if (pedestalBlockEntity.isEmpty() && !pStack.isEmpty()) {
-                pedestalBlockEntity.setItem(0, pStack);
-                pStack.shrink(1);
-                pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
-            } else if (pStack.isEmpty()) {
-                ItemStack stackOnPedestal = pedestalBlockEntity.getItem(0);
-                pPlayer.setItemInHand(InteractionHand.MAIN_HAND, stackOnPedestal);
-                pedestalBlockEntity.clearContent();
-                pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
-            }
+        if(pLevel.getBlockEntity(pPos) instanceof PedestalBlockEntity pedestalBlockEntity) {
+        if(pPlayer.isCrouching() && !pLevel.isClientSide()) {
+            ((ServerPlayer) pPlayer).openMenu(new SimpleMenuProvider(pedestalBlockEntity, Component.literal("Pedestal")), pPos);
+            return ItemInteractionResult.SUCCESS;
         }
 
-        return ItemInteractionResult.SUCCESS;
+        if(pedestalBlockEntity.isEmpty() && !pStack.isEmpty()) {
+            pedestalBlockEntity.setItem(0, pStack);
+            pStack.shrink(1);
+            pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
+        } else if(pStack.isEmpty()) {
+            ItemStack stackOnPedestal = pedestalBlockEntity.getItem(0);
+            pPlayer.setItemInHand(InteractionHand.MAIN_HAND, stackOnPedestal);
+            pedestalBlockEntity.clearContent();
+            pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
+        }
     }
+
+        return ItemInteractionResult.SUCCESS;
+}
 }

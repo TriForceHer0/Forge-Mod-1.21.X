@@ -11,5 +11,6 @@
   "block.mod.magnesium_ore": "Magnesium Ore",
   "block.mod.quartzite_block": "Quartzite Block",
   "block.mod.deepslate_pentlandite_ore": "Deepslate Pentlandite Ore",
-  "block.mod.pedestal": "Pedestal"
+
+  "name.mod.pedestal_be": "Pedestal"
 }
