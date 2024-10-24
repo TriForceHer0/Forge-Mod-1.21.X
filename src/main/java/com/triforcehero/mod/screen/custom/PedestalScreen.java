@@ -1,6 +1,6 @@
 package com.triforcehero.mod.screen.custom;
+
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.triforcehero.mod.Mod;
 import com.triforcehero.mod.Mod;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -32,6 +32,7 @@ public class PedestalScreen extends AbstractContainerScreen<PedestalMenu> {
         RenderSystem.setShaderTexture(0, GUI_TEXTURE);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
+
         guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
     }
 

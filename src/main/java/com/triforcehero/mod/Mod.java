@@ -5,6 +5,9 @@ import com.triforcehero.mod.block.ModBlocks;
 import com.triforcehero.mod.block.entity.ModBlockEntities;
 import com.triforcehero.mod.block.entity.renderer.PedestalBlockEntityRenderer;
 import com.triforcehero.mod.item.ModItems;
+import com.triforcehero.mod.screen.ModMenuTypes;
+import com.triforcehero.mod.screen.custom.PedestalScreen;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -46,6 +49,8 @@ public class Mod {
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
+
+        ModMenuTypes.register(modEventBus);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -89,7 +94,7 @@ public class Mod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            MenuScreens.register(ModMenuTypes.PEDESTAL_MENU.get(), PedestalScreen::new);
         }
 
         @SubscribeEvent

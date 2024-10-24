@@ -67,23 +67,23 @@ public class PedestalBlock extends BaseEntityBlock {
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
 
         if(pLevel.getBlockEntity(pPos) instanceof PedestalBlockEntity pedestalBlockEntity) {
-        if(pPlayer.isCrouching() && !pLevel.isClientSide()) {
-            ((ServerPlayer) pPlayer).openMenu(new SimpleMenuProvider(pedestalBlockEntity, Component.literal("Pedestal")), pPos);
-            return ItemInteractionResult.SUCCESS;
-        }
+            if(pPlayer.isCrouching() && !pLevel.isClientSide()) {
+                ((ServerPlayer) pPlayer).openMenu(new SimpleMenuProvider(pedestalBlockEntity, Component.literal("Pedestal")), pPos);
+                return ItemInteractionResult.SUCCESS;
+            }
 
-        if(pedestalBlockEntity.isEmpty() && !pStack.isEmpty()) {
-            pedestalBlockEntity.setItem(0, pStack);
-            pStack.shrink(1);
-            pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
-        } else if(pStack.isEmpty()) {
-            ItemStack stackOnPedestal = pedestalBlockEntity.getItem(0);
-            pPlayer.setItemInHand(InteractionHand.MAIN_HAND, stackOnPedestal);
-            pedestalBlockEntity.clearContent();
-            pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
+            if(pedestalBlockEntity.isEmpty() && !pStack.isEmpty()) {
+                pedestalBlockEntity.setItem(0, pStack);
+                pStack.shrink(1);
+                pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
+            } else if(pStack.isEmpty()) {
+                ItemStack stackOnPedestal = pedestalBlockEntity.getItem(0);
+                pPlayer.setItemInHand(InteractionHand.MAIN_HAND, stackOnPedestal);
+                pedestalBlockEntity.clearContent();
+                pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
+            }
         }
-    }
 
         return ItemInteractionResult.SUCCESS;
-}
+    }
 }
