@@ -17,38 +17,34 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jline.utils.InfoCmp;
-
-import javax.swing.plaf.basic.BasicComboBoxUI;
-import java.security.DrbgParameters;
 
 public class PedestalBlockEntity extends BlockEntity implements Container, MenuProvider {
-    private final ItemStackHandler inventory  = new ItemStackHandler(1) {
+    private final ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
-        protected int getStackLimit(int  slot, @NotNull ItemStack stack) {
+        protected int getStackLimit(int slot, @NotNull ItemStack stack) {
             return 1;
         }
 
-        protected void onContentChanged(int slot)  {
+        @Override
+        protected void onContentsChanged(int slot) {
             setChanged();
-            if (!level.isClientSide()) {
+            if(!level.isClientSide()) {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
     };
     private float rotation = 0;
-    private LazyOptional<ItemStackHandler> lazyItemHandler = LazyOptional.empty();
+    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
     public PedestalBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.PEDESTAL_BE.get(), pPos, pBlockState);
@@ -61,9 +57,9 @@ public class PedestalBlockEntity extends BlockEntity implements Container, MenuP
 
     @Override
     public boolean isEmpty() {
-        for (int i = 0; i < getContainerSize(); i++){
+        for(int i = 0; i < getContainerSize(); i++) {
             ItemStack stack = getItem(i);
-            if(!stack.isEmpty()){
+            if(!stack.isEmpty()) {
                 return false;
             }
         }
@@ -87,7 +83,7 @@ public class PedestalBlockEntity extends BlockEntity implements Container, MenuP
     @Override
     public ItemStack removeItemNoUpdate(int i) {
         setChanged();
-        return i >= 0 && 1 < getContainerSize() ? inventory.insertItem(i, ItemStack.EMPTY, false) : ItemStack.EMPTY;
+        return i >= 0 && i < getContainerSize() ? inventory.insertItem(i, ItemStack.EMPTY, false) : ItemStack.EMPTY;
     }
 
     @Override
@@ -103,7 +99,7 @@ public class PedestalBlockEntity extends BlockEntity implements Container, MenuP
 
     @Override
     public void clearContent() {
-        for (int i = 0; 1 < getContainerSize(); i++) {
+        for(int i = 0; i < getContainerSize(); i++) {
             inventory.extractItem(i, 64, false);
         }
     }
@@ -137,7 +133,6 @@ public class PedestalBlockEntity extends BlockEntity implements Container, MenuP
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         return saveWithoutMetadata(pRegistries);
-
     }
 
     @Override
@@ -154,19 +149,21 @@ public class PedestalBlockEntity extends BlockEntity implements Container, MenuP
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            if (side == null){
+        if(cap == ForgeCapabilities.ITEM_HANDLER) {
+            if(side == null) {
                 return lazyItemHandler.cast();
             }
         }
+
         return super.getCapability(cap, side);
     }
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("name.mod.pedestal_be");
+        return Component.translatable("name.mccourse.pedestal_be");
     }
 
+    @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
         return new PedestalMenu(i, inventory, this);
