@@ -1,6 +1,7 @@
 package com.triforcehero.mod.block;
 
 import com.triforcehero.mod.Mod;
+import com.triforcehero.mod.block.custom.CrusherBlock;
 import com.triforcehero.mod.block.custom.PedestalBlock;
 import com.triforcehero.mod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -53,6 +54,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PEDESTAL = registerBlock("pedestal",
             () -> new PedestalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
+
+    public static final RegistryObject<Block> CRUSHER = registerBlock("crusher",
+            () -> new CrusherBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){

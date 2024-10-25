@@ -27,6 +27,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.RAWLEAD.get())
                 .add(ModItems.MAGNESIUM.get())
                 .add(ModItems.QUARTZITECHUNK.get())
+                .add(ModItems.SILICAPOWDER.get())
                 .add(Items.COAL)
                 .add(Items.STICK)
                 .add(Items.COMPASS);

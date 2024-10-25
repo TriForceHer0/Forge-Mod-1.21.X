@@ -18,6 +18,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("pedestal_be", () ->
                     BlockEntityType.Builder.of(PedestalBlockEntity::new, ModBlocks.PEDESTAL.get()).build( null));
 
+    public static final RegistryObject<BlockEntityType<PedestalBlockEntity>> CRUSHER_BE =
+            BLOCK_ENTITIES.register("crusher_be", () ->
+                    BlockEntityType.Builder.of(PedestalBlockEntity::new, ModBlocks.CRUSHER.get()).build( null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

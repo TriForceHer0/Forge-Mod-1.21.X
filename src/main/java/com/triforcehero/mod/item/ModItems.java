@@ -24,6 +24,9 @@ public class ModItems {
     public static final RegistryObject<Item> QUARTZITECHUNK = ITEMS.register("quartzite_chunk",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> SILICAPOWDER = ITEMS.register("silica_powder",
+            () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }
