@@ -1,6 +1,7 @@
 package com.triforcehero.mod.screen;
 
 import com.triforcehero.mod.Mod;
+import com.triforcehero.mod.screen.custom.CrusherMenu;
 import com.triforcehero.mod.screen.custom.PedestalMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -17,6 +18,9 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<PedestalMenu>> PEDESTAL_MENU =
             registerMenuType("pedestal_menu", PedestalMenu::new);
+
+    public static final RegistryObject<MenuType<CrusherMenu>> CRUSHER_MENU =
+            registerMenuType("crusher_menu", CrusherMenu::new);
 
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(String name,
                                                                                                  IContainerFactory<T> factory) {

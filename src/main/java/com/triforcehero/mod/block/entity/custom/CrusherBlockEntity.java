@@ -3,6 +3,7 @@ package com.triforcehero.mod.block.entity.custom;
 import com.triforcehero.mod.block.custom.CrusherBlock;
 import com.triforcehero.mod.block.entity.ModBlockEntities;
 import com.triforcehero.mod.item.ModItems;
+import com.triforcehero.mod.screen.custom.CrusherMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -90,7 +91,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return
+        return new CrusherMenu(i, inventory, this, this.data);
     }
 
     @Override
@@ -144,7 +145,6 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         if(hasRecipe() && isOutputSlotEmptyOrReceivable()) {
             increaseCraftingProgress();
             setChanged(level, pPos, pState);
-
             if(hasCraftingFinished()) {
                 craftItem();
                 resetProgress();

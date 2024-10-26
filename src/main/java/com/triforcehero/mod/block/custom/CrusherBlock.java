@@ -22,9 +22,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class CrusherBlock extends BaseEntityBlock {
-    public static final MapCodec<CrusherBlock> CODEC = simpleCodec(CrusherBlock::new)
+    public static final MapCodec<CrusherBlock> CODEC = simpleCodec(CrusherBlock::new);
 
-    protected CrusherBlock(Properties pProperties) {
+    public CrusherBlock(Properties pProperties) {
         super(pProperties);
     }
 

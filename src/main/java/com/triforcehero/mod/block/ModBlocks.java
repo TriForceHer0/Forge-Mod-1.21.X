@@ -56,7 +56,7 @@ public class ModBlocks {
             () -> new PedestalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
     public static final RegistryObject<Block> CRUSHER = registerBlock("crusher",
-            () -> new CrusherBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
+            () -> new CrusherBlock(BlockBehaviour.Properties.of().strength(2f).noOcclusion()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){

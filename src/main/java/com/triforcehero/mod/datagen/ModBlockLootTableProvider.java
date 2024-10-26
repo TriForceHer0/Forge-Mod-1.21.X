@@ -31,6 +31,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.LEAD_BLOCK.get());
         dropSelf(ModBlocks.MAGCHUNK_BLOCK.get());
         dropSelf(ModBlocks.PEDESTAL.get());
+        dropSelf(ModBlocks.CRUSHER.get());
 
 
         this.add(ModBlocks.LEAD_ORE.get(),

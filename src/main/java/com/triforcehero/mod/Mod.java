@@ -6,6 +6,7 @@ import com.triforcehero.mod.block.entity.ModBlockEntities;
 import com.triforcehero.mod.block.entity.renderer.PedestalBlockEntityRenderer;
 import com.triforcehero.mod.item.ModItems;
 import com.triforcehero.mod.screen.ModMenuTypes;
+import com.triforcehero.mod.screen.custom.CrusherScreen;
 import com.triforcehero.mod.screen.custom.PedestalScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -95,6 +96,7 @@ public class Mod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.PEDESTAL_MENU.get(), PedestalScreen::new);
+            MenuScreens.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
         }
 
         @SubscribeEvent
