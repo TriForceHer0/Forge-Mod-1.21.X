@@ -68,6 +68,7 @@ public class Mod {
             event.accept(ModItems.MAGNESIUM);
             event.accept(ModItems.RAWLEAD);
             event.accept(ModItems.QUARTZITECHUNK);
+            event.accept(ModItems.SILICAPOWDER);
 
         }
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {

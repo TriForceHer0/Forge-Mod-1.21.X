@@ -165,6 +165,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         itemHandler.extractItem(INPUT_SLOT, 4, false);
         itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(output.getItem(),
                 itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + output.getCount()));
+
     }
 
     private boolean hasCraftingFinished() {
@@ -176,8 +177,9 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean isOutputSlotEmptyOrReceivable() {
-        return  this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
-                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() < this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
+      return  this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
+           this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() < this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
+
 
     }
 
